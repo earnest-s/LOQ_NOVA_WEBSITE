@@ -17,7 +17,7 @@ export default function Hero() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(232,100,74,0.045) 0%, transparent 70%)',
+                        'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(232,100,74,0.027) 0%, transparent 70%)',
                 }}
             />
             {/* Very faint app UI background crop */}
@@ -32,18 +32,10 @@ export default function Hero() {
             />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
-                {/* Version badge */}
-                <motion.div {...fade(0)} className="inline-flex items-center gap-2 border border-white/[0.06] bg-white/[0.02] px-3 py-1 mb-10">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#e8644a]" />
-                    <span className="font-mono-code text-[9px] text-white/30 tracking-[0.18em] uppercase">
-                        Version 3.0.0 — Stable Release
-                    </span>
-                </motion.div>
-
                 {/* Headline */}
                 <motion.h1
                     {...fade(0.06)}
-                    className="text-[clamp(48px,8vw,88px)] font-black tracking-[-0.03em] text-white leading-[0.95] mb-5 uppercase"
+                    className="text-[clamp(48px,8vw,88px)] font-[900] tracking-[-0.04em] text-white leading-[0.92] mb-5 uppercase"
                 >
                     Total Control.
                     <br />
@@ -53,10 +45,10 @@ export default function Hero() {
                 {/* Subheadline */}
                 <motion.p
                     {...fade(0.12)}
-                    className="text-[13px] text-white/30 font-medium max-w-lg mx-auto leading-relaxed mb-10 tracking-wide"
+                    className="text-[13px] text-white/30 font-medium max-w-lg mx-auto leading-[1.6] mb-10 tracking-[0.01em]"
                 >
-                    Precision performance tuning for LOQ systems — without the overhead.
-                    Direct hardware integration. No background services.
+                    Direct subsystem power envelope control for LOQ hardware — without the abstraction layer.
+                    Natively integrated hardware access. Zero background agents.
                 </motion.p>
 
                 {/* CTAs */}

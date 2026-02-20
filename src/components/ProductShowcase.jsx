@@ -71,7 +71,7 @@ function ShowcaseRow({ section, index }) {
         <div
             ref={ref}
             id={section.id}
-            className={`flex flex-col ${section.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 py-16 px-6 border-t border-white/[0.04]`}
+            className={`flex flex-col ${section.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 py-14 px-6 border-b border-white/[0.04] last:border-0`}
         >
             {/* Text side */}
             <motion.div
@@ -86,10 +86,10 @@ function ShowcaseRow({ section, index }) {
                         {section.tag}
                     </span>
                 </div>
-                <h2 className="text-[17px] font-black text-white tracking-tight leading-snug mb-3 uppercase">
+                <h2 className="text-[17px] font-[800] text-white tracking-[-0.01em] leading-[1.2] mb-2 uppercase">
                     {section.title}
                 </h2>
-                <p className="text-[12px] text-white/30 leading-relaxed max-w-xs font-medium">
+                <p className="text-[12px] text-white/25 leading-[1.65] max-w-xs font-medium">
                     {section.desc}
                 </p>
             </motion.div>
@@ -101,7 +101,7 @@ function ShowcaseRow({ section, index }) {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.28, delay: 0.1, ease: 'easeOut' }}
             >
-                <div className="bg-[#11161d] rounded-[14px] p-px border border-white/[0.07] shadow-[0_16px_48px_rgba(0,0,0,0.55)] overflow-hidden">
+                <div className="bg-[#11161d] rounded-[14px] p-px border border-white/[0.06] shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                     <div className="rounded-[13px] overflow-hidden bg-[#0d1117]">
                         <img
                             src={section.image}
@@ -128,11 +128,11 @@ export default function ProductShowcase() {
                             Inside LOQ Nova
                         </span>
                     </div>
-                    <h2 className="text-[28px] font-black text-white tracking-tight uppercase max-w-lg">
+                    <h2 className="text-[28px] font-[800] text-white tracking-[-0.02em] uppercase max-w-lg leading-tight">
                         System-Level Architecture
                     </h2>
-                    <p className="text-[12px] text-white/25 font-medium mt-2 max-w-sm leading-relaxed">
-                        Every subsystem built for direct hardware access — no abstraction layers, no overhead services.
+                    <p className="text-[12px] text-white/20 font-medium mt-1.5 max-w-sm leading-[1.6]">
+                        Every subsystem built for direct hardware access — no abstraction layers, no intermediary routing logic.
                     </p>
                 </div>
 
