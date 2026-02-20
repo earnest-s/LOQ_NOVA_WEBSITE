@@ -1,16 +1,28 @@
-# React + Vite
+# LOQ Nova Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official product website for **LOQ Nova v3.0.0** — an advanced, low-overhead system utility built for direct hardware optimization on LOQ systems.
 
-Currently, two official plugins are available:
+## Overview
+This repository contains the complete redesigned website for the LOQ Nova application. The design language specifically reflects an enterprise-grade, hardware-level architecture — prioritizing high density, strict geometric layouts, minimal styling, and a near-zero marketing feel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+* **React** (via Vite)
+* **Tailwind CSS v4** for clean, utility-first styling
+* **Framer Motion** for subtle, non-intrusive scroll animations
 
-## React Compiler
+## Features
+* **Enterprise Dark Theme**: Strictly operating in the `#0b0f14` to `#e5e7eb` color range, accented by a single high-contrast coral (`#e8644a`).
+* **Subtle Motion Design**: Animated via Framer Motion, exclusively utilizing simple translates and opacity fades to maintain a professional response curve.
+* **Component Architecture**: 
+  * `Hero` - Minimal, high-impact typography with a subtle depth gradient.
+  * `Product Showcase` - Dense, alternating layouts demonstrating hardware telemetry and control interfaces.
+  * `RGB Engine` - Deep-dive hardware lighting specs.
+  * `Performance Modes` - Interactive system envelope toggle.
+  * `Architecture` - Bold grid metrics demonstrating `< 0.5% CPU Idle` and zero OEM bloat.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development Setup
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Run dev server: `npm run dev`
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*Built for the performance purist.*
