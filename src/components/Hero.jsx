@@ -24,7 +24,7 @@ export default function Hero() {
             <div
                 className="pointer-events-none absolute inset-0 opacity-[0.05]"
                 style={{
-                    backgroundImage: "url('/Images/Screenshot 2026-02-19 235324.png')",
+                    backgroundImage: "url('/Images/dashboard.png')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: 'blur(28px) saturate(0.4)',

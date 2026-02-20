@@ -107,11 +107,6 @@ function ShowcaseRow({ section, index }) {
                             src={section.image}
                             alt={section.label}
                             className="w-full h-auto block"
-                            style={{
-                                clipPath: 'inset(4.2% 0 4.8% 0)',
-                                transform: 'scale(1.095)',
-                                transformOrigin: 'center',
-                            }}
                             loading="lazy"
                         />
                     </div>

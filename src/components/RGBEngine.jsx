@@ -53,14 +53,9 @@ export default function RGBEngine() {
                         <div className="bg-[#11161d] rounded-[14px] p-px border border-white/[0.07] shadow-[0_16px_48px_rgba(0,0,0,0.55)] overflow-hidden">
                             <div className="rounded-[13px] overflow-hidden bg-[#0d1117]">
                                 <img
-                                    src="/Images/Screenshot 2026-02-19 235429.png"
+                                    src="/Images/lighting.png"
                                     alt="HID Lighting Engine"
                                     className="w-full h-auto block"
-                                    style={{
-                                        clipPath: 'inset(4.2% 0 4.8% 0)',
-                                        transform: 'scale(1.095)',
-                                        transformOrigin: 'center',
-                                    }}
                                     loading="lazy"
                                 />
                             </div>
