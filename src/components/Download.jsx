@@ -10,7 +10,7 @@ export default function Download() {
 
     return (
         <section id="download" className="bg-[#0b0f14] border-t border-white/[0.04]">
-            <div className="max-w-7xl mx-auto px-6 py-24" ref={ref}>
+            <div className="max-w-7xl mx-auto px-6 py-16" ref={ref}>
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
                     {/* Left */}
                     <motion.div
@@ -25,12 +25,11 @@ export default function Download() {
                                 Download
                             </span>
                         </div>
-                        <h2 className="text-[28px] font-black text-white tracking-tight uppercase mb-3">
-                            LOQ Nova 3.0.0
+                        <h2 className="text-[28px] font-[900] tracking-[-0.02em] text-white uppercase mb-2">
+                            Deployment Package
                         </h2>
-                        <p className="text-[12px] text-white/25 font-medium leading-relaxed mb-2">
-                            Windows x64 executable. Single file. No installer. No system
-                            service registration. No subscription.
+                        <p className="text-[12px] text-white/20 font-medium leading-[1.65] mb-2 max-w-sm">
+                            Compiled x64 binary. Single executable payload. Direct hardware interface. Zero dependency footprint.
                         </p>
                         <div className="flex items-center gap-2 mt-4">
                             <span className="font-mono-code text-[8.5px] text-white/15 uppercase tracking-widest">
@@ -58,14 +57,14 @@ export default function Download() {
                             href={RELEASES_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-between gap-4 bg-[#e8644a] text-white px-6 py-4 hover:bg-[#d45a41] transition-colors duration-200 group"
+                            className="flex items-center justify-between gap-4 bg-[#e8644a] text-white px-6 py-4 hover:bg-[#e8644a]/90 transition-colors duration-0 group"
                         >
                             <div>
-                                <div className="text-[10px] font-black tracking-[0.18em] uppercase mb-0.5">
-                                    Download for Windows
+                                <div className="text-[10px] font-[900] tracking-[0.2em] uppercase mb-0.5">
+                                    Download Direct
                                 </div>
-                                <div className="font-mono-code text-[8px] text-white/60 tracking-wide">
-                                    LOQNova_v3.0.0.exe — Windows x64
+                                <div className="font-mono-code text-[8px] text-white/50 tracking-wide">
+                                    LOQNova_v3.0.0.exe
                                 </div>
                             </div>
                             <svg
@@ -73,7 +72,7 @@ export default function Download() {
                                 height="14"
                                 viewBox="0 0 16 16"
                                 fill="none"
-                                className="opacity-60 group-hover:opacity-100 transition-opacity shrink-0"
+                                className="opacity-40 group-hover:opacity-100 transition-opacity shrink-0"
                             >
                                 <path
                                     d="M8 2v8M4 7l4 4 4-4M2 13h12"

@@ -5,8 +5,8 @@ const MODES = [
     {
         id: 'quiet',
         label: 'Quiet',
-        color: '#3b82f6',
-        accent: 'rgba(59,130,246,0.12)',
+        color: '#2563eb', // Darker blue
+        accent: 'rgba(37,99,235,0.06)',
         tag: 'Thermal Efficiency',
         specs: [
             { key: 'Fan Profile', val: 'Minimal RPM' },
@@ -14,13 +14,13 @@ const MODES = [
             { key: 'Refresh Rate', val: '60 Hz Lock' },
             { key: 'Keyboard Backlight', val: 'Off / Dim' },
         ],
-        desc: 'Prioritizes acoustic performance and thermal efficiency. CPU and GPU power limits are constrained to extend battery life. Fan curves are suppressed to near-silent operation.',
+        desc: 'Prioritizes acoustic performance and thermal efficiency. Compute limits constrained to extend battery lifecycle. Fan curves suppressed to near-silent operation.',
     },
     {
         id: 'balance',
         label: 'Balance',
-        color: '#e5e7eb',
-        accent: 'rgba(229,231,235,0.06)',
+        color: '#a1a1aa', // Darker gray
+        accent: 'rgba(161,161,170,0.04)',
         tag: 'Adaptive Response',
         specs: [
             { key: 'Fan Profile', val: 'Adaptive Curve' },
@@ -28,13 +28,13 @@ const MODES = [
             { key: 'Refresh Rate', val: 'Auto' },
             { key: 'Keyboard Backlight', val: 'System Default' },
         ],
-        desc: 'Dynamic thermal response that scales with workload demand. System resources allocated proportionally — no fixed ceiling on compute or thermal output.',
+        desc: 'Dynamic thermal response scaling with workload demand. Hardware resources allocated proportionally — no fixed ceiling on thermal output.',
     },
     {
         id: 'performance',
         label: 'Performance',
-        color: '#ef4444',
-        accent: 'rgba(239,68,68,0.1)',
+        color: '#dc2626', // Darker red
+        accent: 'rgba(220,38,38,0.06)',
         tag: 'Maximum Throughput',
         specs: [
             { key: 'Fan Profile', val: 'Aggressive Curve' },
@@ -42,13 +42,13 @@ const MODES = [
             { key: 'Refresh Rate', val: '165 Hz Unlocked' },
             { key: 'Keyboard Backlight', val: 'Full Brightness' },
         ],
-        desc: 'Full power delivery to CPU and GPU. Fan curves maximized for sustained thermal headroom. Peak TDP maintained under continuous load. No throttle limits.',
+        desc: 'Unrestricted power delivery to CPU and GPU. Fan curves maximized for sustained thermal headroom. Peak TDP maintained under continuous load without throttle limits.',
     },
     {
         id: 'custom',
         label: 'Custom',
-        color: '#a855f7',
-        accent: 'rgba(168,85,247,0.1)',
+        color: '#9333ea', // Darker purple
+        accent: 'rgba(147,51,234,0.06)',
         tag: 'User-Defined',
         specs: [
             { key: 'Fan Profile', val: 'User Curve' },
@@ -56,7 +56,7 @@ const MODES = [
             { key: 'Refresh Rate', val: 'User-Defined' },
             { key: 'Keyboard Backlight', val: 'Custom' },
         ],
-        desc: 'Full manual control over every parameter. Fan curves, power limits, refresh rates, and display settings are individually configurable through the configuration registry.',
+        desc: 'Full manual control over configuration registers. Fan curves, power limits, and display timings are individually addressable through the engine UI.',
     },
 ]
 
@@ -78,22 +78,12 @@ export default function PerformanceModes() {
                             Performance Modes
                         </span>
                     </div>
-                    <motion.h2
-                        className="text-[28px] font-black text-white tracking-tight uppercase mb-2"
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.28, ease: 'easeOut' }}
-                    >
+                    <h2 className="text-[28px] font-[900] tracking-[-0.02em] text-white uppercase mb-2">
                         Thermal Operating Modes
-                    </motion.h2>
-                    <motion.p
-                        className="text-[12px] text-white/25 font-medium mb-12 max-w-md leading-relaxed"
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.28, delay: 0.06, ease: 'easeOut' }}
-                    >
-                        Four defined thermal envelopes with distinct power policies. Direct Fn+Q integration maps each mode to hardware state.
-                    </motion.p>
+                    </h2>
+                    <p className="text-[12px] text-white/20 font-medium mb-12 max-w-md leading-[1.6]">
+                        Four defined thermal envelopes with distinct power policies. Direct Fn+Q integration maps each mode to specific hardware execution variants.
+                    </p>
                 </div>
 
                 {/* Mode selector */}
@@ -151,12 +141,12 @@ export default function PerformanceModes() {
                                     </span>
                                 </div>
                                 <h3
-                                    className="text-[22px] font-black uppercase tracking-tight mb-3"
-                                    style={{ color: mode.color === '#e5e7eb' ? '#ffffff' : mode.color }}
+                                    className="text-[22px] font-[900] uppercase tracking-[-0.02em] mb-3"
+                                    style={{ color: mode.color === '#a1a1aa' ? '#ffffff' : mode.color }}
                                 >
                                     {mode.label} Mode
                                 </h3>
-                                <p className="text-[12px] text-white/30 leading-relaxed font-medium max-w-xs">
+                                <p className="text-[11.5px] text-white/25 leading-[1.65] font-medium max-w-xs">
                                     {mode.desc}
                                 </p>
                             </div>
@@ -174,7 +164,7 @@ export default function PerformanceModes() {
                                             </span>
                                             <span
                                                 className="font-mono-code text-[10px] font-semibold"
-                                                style={{ color: mode.color === '#e5e7eb' ? 'rgba(255,255,255,0.7)' : mode.color }}
+                                                style={{ color: mode.color === '#94a3b8' ? 'rgba(255,255,255,0.7)' : mode.color }}
                                             >
                                                 {s.val}
                                             </span>

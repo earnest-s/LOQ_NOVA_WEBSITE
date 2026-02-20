@@ -39,7 +39,7 @@ export default function Architecture() {
 
     return (
         <section className="bg-[#0d1117] border-t border-white/[0.04]">
-            <div className="max-w-7xl mx-auto px-6 py-20" ref={ref}>
+            <div className="max-w-7xl mx-auto px-6 py-16" ref={ref}>
                 {/* Header */}
                 <div className="flex items-center gap-3 mb-2">
                     <div className="w-6 h-px bg-white/10" />
@@ -48,21 +48,20 @@ export default function Architecture() {
                     </span>
                 </div>
                 <motion.h2
-                    className="text-[28px] font-black text-white tracking-tight uppercase mb-2"
+                    className="text-[28px] font-[900] tracking-[-0.02em] text-white uppercase mb-1"
                     initial={{ opacity: 0, y: 12 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                 >
-                    Lightweight by Design
+                    Lightweight Architecture
                 </motion.h2>
                 <motion.p
-                    className="text-[12px] text-white/25 font-medium mb-14 max-w-md leading-relaxed"
+                    className="text-[12px] text-white/25 font-medium mb-12 max-w-md leading-[1.6]"
                     initial={{ opacity: 0, y: 12 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.28, delay: 0.06, ease: 'easeOut' }}
                 >
-                    No bloat services. No persistent daemons. No OEM cruft. LOQ Nova loads
-                    on demand and exits completely when closed.
+                    Designed without standard software conventions. Deployed on demand. Native API binding limits persistent resident set.
                 </motion.p>
 
                 {/* Metrics grid */}
@@ -73,14 +72,14 @@ export default function Architecture() {
                     transition={{ duration: 0.28, delay: 0.1, ease: 'easeOut' }}
                 >
                     {METRICS.map((m, i) => (
-                        <div key={i} className="bg-[#0d1117] p-7">
-                            <div className="text-[32px] font-black text-white tracking-tight leading-none mb-1">
+                        <div key={i} className="bg-[#0d1117] p-7 flex flex-col justify-center">
+                            <div className="text-[34px] font-[900] text-white tracking-[-0.03em] leading-none mb-1">
                                 {m.value}
                             </div>
-                            <div className="text-[9px] font-bold text-[#e8644a] uppercase tracking-[0.16em] mb-2">
+                            <div className="text-[9px] font-[800] text-[#e8644a] uppercase tracking-[0.18em] mb-2.5">
                                 {m.unit}
                             </div>
-                            <p className="text-[10.5px] text-white/20 leading-relaxed font-medium">{m.desc}</p>
+                            <p className="text-[10px] text-white/15 leading-[1.65] font-medium">{m.desc}</p>
                         </div>
                     ))}
                 </motion.div>
