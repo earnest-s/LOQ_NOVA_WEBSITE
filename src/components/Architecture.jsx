@@ -3,24 +3,24 @@ import { motion, useInView } from 'framer-motion'
 
 const METRICS = [
     {
-        value: '< 0.5%',
-        unit: 'CPU Idle',
-        desc: 'Background process footprint under zero-load conditions.',
+        value: 'On-Demand',
+        unit: 'Execution',
+        desc: 'Launches only when invoked. No persistent background daemon.',
     },
     {
-        value: '~4 MB',
-        unit: 'RAM Usage',
-        desc: 'Near-zero working set. No heap bloat, no cached modules.',
+        value: 'Zero Service',
+        unit: 'Registration',
+        desc: 'No Windows services installed by default.',
     },
     {
-        value: '0',
-        unit: 'OEM Services',
-        desc: 'No background services. No system tray agents. No schedulers.',
+        value: 'Native API',
+        unit: 'Binding',
+        desc: 'Direct WMI / ACPI / HID integration.',
     },
     {
-        value: 'Direct',
-        unit: 'HW Integration',
-        desc: 'USB HID and WMI interfaces accessed natively — no intermediary drivers.',
+        value: 'Single Binary',
+        unit: 'Deployment',
+        desc: 'Standalone executable. No installer dependency.',
     },
 ]
 
@@ -53,7 +53,7 @@ export default function Architecture() {
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                 >
-                    Lightweight Architecture
+                    RUNTIME ARCHITECTURE
                 </motion.h2>
                 <motion.p
                     className="text-[12px] text-white/25 font-medium mb-12 max-w-md leading-[1.6]"
@@ -61,7 +61,7 @@ export default function Architecture() {
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.28, delay: 0.06, ease: 'easeOut' }}
                 >
-                    Designed without standard software conventions. Deployed on demand. Native API binding limits persistent resident set.
+                    Designed for direct hardware binding. No persistent resident services.
                 </motion.p>
 
                 {/* Metrics grid */}
@@ -73,7 +73,7 @@ export default function Architecture() {
                 >
                     {METRICS.map((m, i) => (
                         <div key={i} className="bg-[#0d1117] p-7 flex flex-col justify-center">
-                            <div className="text-[34px] font-[900] text-white tracking-[-0.03em] leading-none mb-1">
+                            <div className="text-[24px] font-[900] text-white tracking-[-0.03em] leading-none mb-1">
                                 {m.value}
                             </div>
                             <div className="text-[9px] font-[800] text-[#e8644a] uppercase tracking-[0.18em] mb-2.5">
