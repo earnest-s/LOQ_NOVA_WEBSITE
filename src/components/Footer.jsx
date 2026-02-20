@@ -27,10 +27,10 @@ export default function Footer() {
                         Version 3.0.0
                     </p>
                     <p className="font-mono-code text-[8.5px] text-white/12 uppercase tracking-widest">
-                        Built for LOQ Systems
+                        Built for LOQ Laptops
                     </p>
                     <p className="font-mono-code text-[8.5px] text-white/10 uppercase tracking-widest mt-1">
-                        © 2026 Ernest S
+                        © 2026 Earnest S
                     </p>
                 </div>
 

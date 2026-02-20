@@ -47,7 +47,7 @@ export default function Hero() {
                     {...fade(0.12)}
                     className="text-[13px] text-white/30 font-medium max-w-lg mx-auto leading-[1.6] mb-10 tracking-[0.01em]"
                 >
-                    Direct subsystem power envelope control for LOQ hardware — without the abstraction layer.
+                    Direct subsystem power envelope control for LOQ Laptops — without the abstraction layer.
                     Natively integrated hardware access. Zero background agents.
                 </motion.p>
 
