@@ -1,6 +1,6 @@
 # LOQ Nova Website
 
-Official product website for **LOQ Nova v3.0.0** — an advanced, low-overhead system utility built for direct hardware optimization on LOQ systems.
+Official product website for **LOQ Nova** — an advanced, low-overhead system utility built for direct hardware optimization on LOQ systems.
 
 ## Overview
 This repository contains the complete redesigned website for the LOQ Nova application. The design language specifically reflects an enterprise-grade, hardware-level architecture — prioritizing high density, strict geometric layouts, minimal styling, and a near-zero marketing feel.

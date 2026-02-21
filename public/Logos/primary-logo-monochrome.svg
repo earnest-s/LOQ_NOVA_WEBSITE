@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1152 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Hardware Symbol (Monochrome) -->
+    <g transform="translate(48, 0)">
+        <!-- Stepped Waveform Solid Geometric Mass -->
+        <path d="M 0 176 H 24 A 24 24 0 0 0 48 152 V 104 H 120 V 32 H 144 V 152 H 72 V 224 H 0 Z" fill="#ffffff" />
+        
+        <!-- Max Performance Target Indicator (Integrated Step) -->
+        <rect x="144" y="32" width="48" height="48" fill="#ffffff" />
+    </g>
+
+    <!-- Wordmark LOQ NOVA -->
+    <g transform="translate(320, 0)" stroke="#ffffff" stroke-width="24" stroke-linejoin="bevel" stroke-linecap="butt" fill="none">
+        <!-- L -->
+        <path d="M 12 56 V 200 H 76" />
+        <!-- O -->
+        <rect x="116" y="56" width="64" height="144" />
+        <!-- Q -->
+        <rect x="220" y="56" width="64" height="144" />
+        <!-- Q Tail (Mechanical 45-deg cut) -->
+        <path d="M 252 168 L 292 208" />
+        
+        <!-- N -->
+        <path d="M 386 200 V 56 L 458 200 V 56" />
+        <!-- O -->
+        <rect x="498" y="56" width="64" height="144" />
+        <!-- V -->
+        <path d="M 602 56 L 634 200 L 666 56" />
+        <!-- A -->
+        <path d="M 706 200 L 738 56 L 770 200" />
+        <path d="M 723 152 H 753" />
+    </g>
+</svg>
