@@ -18,7 +18,6 @@ This repository contains the complete redesigned website for the LOQ Nova applic
   * `Product Showcase` - Dense, alternating layouts demonstrating hardware telemetry and control interfaces.
   * `RGB Engine` - Deep-dive hardware lighting specs.
   * `Performance Modes` - Interactive system envelope toggle.
-  * `Architecture` - Bold grid metrics demonstrating `< 0.5% CPU Idle` and zero OEM bloat.
 
 ## Development Setup
 1. Clone the repository.
