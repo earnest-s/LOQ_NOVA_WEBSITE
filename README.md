@@ -11,7 +11,6 @@ This repository contains the complete redesigned website for the LOQ Nova applic
 * **Framer Motion** for subtle, non-intrusive scroll animations
 
 ## Features
-* **Enterprise Dark Theme**: Strictly operating in the `#0b0f14` to `#e5e7eb` color range, accented by a single high-contrast coral (`#e8644a`).
 * **Subtle Motion Design**: Animated via Framer Motion, exclusively utilizing simple translates and opacity fades to maintain a professional response curve.
 * **Component Architecture**: 
   * `Hero` - Minimal, high-impact typography with a subtle depth gradient.
@@ -23,5 +22,3 @@ This repository contains the complete redesigned website for the LOQ Nova applic
 1. Clone the repository.
 2. Install dependencies: `npm install`
 3. Run dev server: `npm run dev`
-
-*Built for the performance purist.*
