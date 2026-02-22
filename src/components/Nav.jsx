@@ -31,10 +31,7 @@ export default function Nav() {
       <div className="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 group">
-          <svg width="14" height="14" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white shrink-0">
-            <path d="M 32 176 H 56 A 24 24 0 0 0 80 152 V 104 H 152 V 32 H 176 V 152 H 104 V 224 H 32 Z" fill="currentColor" />
-            <rect x="176" y="32" width="48" height="48" fill="#e8644a" />
-          </svg>
+          <img src="/logo.svg" alt="LOQ Nova" className="w-[18px] h-[18px] shrink-0" />
           <span className="text-[11px] font-bold tracking-[0.18em] text-white uppercase select-none">
             LOQ Nova
           </span>

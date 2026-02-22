@@ -8,17 +8,7 @@ export default function Footer() {
                 {/* Left */}
                 <div className="flex flex-col gap-1.5">
                     <div className="flex items-center gap-2">
-                        <svg width="11" height="11" viewBox="0 0 20 20" fill="none" className="text-white/20 shrink-0">
-                            <polygon
-                                points="10,2 19,17 1,17"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1.8"
-                                strokeLinejoin="round"
-                            />
-                            <line x1="10" y1="8" x2="10" y2="13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                            <circle cx="10" cy="15" r="0.7" fill="currentColor" />
-                        </svg>
+                        <img src="/logo.svg" alt="LOQ Nova Logo" className="w-[11px] h-[11px] shrink-0 opacity-20" />
                         <span className="text-[10px] font-bold tracking-[0.15em] text-white/20 uppercase">
                             LOQ Nova
                         </span>
