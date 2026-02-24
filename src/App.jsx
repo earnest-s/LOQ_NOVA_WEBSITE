@@ -8,6 +8,7 @@ import Architecture from './components/Architecture'
 import Download from './components/Download'
 import Footer from './components/Footer'
 import ProceduralGroundBackground from './components/ProceduralGroundBackground'
+import CardStackDemoPage from './components/CardStackDemoPage'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <CardStackDemoPage />
         <ProductShowcase />
         <RGBEngine />
         <PerformanceModes />
