@@ -9,22 +9,30 @@ import Download from './components/Download'
 import Footer from './components/Footer'
 import ProceduralGroundBackground from './components/ProceduralGroundBackground'
 import CardStackDemoPage from './components/CardStackDemoPage'
+import ScrollProgressBar from './components/ScrollProgressBar'
+import SectionReveal from './components/SectionReveal'
+import FeatureGrid from './components/FeatureGrid'
+import SectionDivider from './components/SectionDivider'
+import SpotlightContainer from './components/SpotlightContainer'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-transparent text-white antialiased relative">
-      <ProceduralGroundBackground />
-      <Nav />
-      <main>
-        <Hero />
-        <CardStackDemoPage />
-        <ProductShowcase />
-        <RGBEngine />
-        <PerformanceModes />
-        <Architecture />
-        <Download />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <ScrollProgressBar />
+      <div>
+        <ProceduralGroundBackground />
+        <Nav />
+        <main>
+          <Hero />
+          <CardStackDemoPage />
+          <ProductShowcase />
+          <RGBEngine />
+          <PerformanceModes />
+          <Architecture />
+          <Download />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
