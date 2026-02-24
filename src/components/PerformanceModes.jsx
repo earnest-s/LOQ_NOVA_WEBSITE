@@ -92,35 +92,28 @@ export default function PerformanceModes() {
                 </div>
 
                 {/* Mode selector */}
-                <motion.div
-                    className="flex items-end gap-0 border-b border-white/[0.06] mb-10"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.28, delay: 0.1, ease: 'easeOut' }}
-                >
-                    {MODES.map((m) => {
-                        const isActive = m.id === active
-                        return (
-                            <button
-                                key={m.id}
-                                onClick={() => setActive(m.id)}
-                                className={`relative px-6 py-3 text-[10px] font-bold tracking-[0.16em] uppercase transition-all duration-200 cursor-pointer ${isActive ? 'text-white' : 'text-white/20 hover:text-white/50'
-                                    }`}
-                                style={{ outline: 'none', background: 'none', border: 'none' }}
-                            >
-                                {m.label}
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="mode-indicator"
-                                        className="absolute bottom-0 left-0 right-0 h-px"
-                                        style={{ backgroundColor: m.color }}
-                                        transition={{ duration: 0.2, ease: 'easeOut' }}
-                                    />
-                                )}
-                            </button>
-                        )
-                    })}
-                </motion.div>
+                <div className="tabs-container mb-10" style={{ background: mode.accent }}>
+                    <div className="tabs" role="tablist">
+                        {MODES.map((m, idx) => {
+                            const isActive = m.id === active
+                            return (
+                                <button
+                                    key={m.id}
+                                    role="tab"
+                                    onClick={() => setActive(m.id)}
+                                    className={`tab${isActive ? ' active' : ''}`}
+                                    style={{ background: 'none', border: 'none' }}
+                                >
+                                    {m.label}
+                                </button>
+                            )
+                        })}
+                        <div
+                            className="tab-underline"
+                            style={{ transform: `translateX(${MODES.findIndex(s => s.id === active) * 100}%)`, width: `${100 / MODES.length}%` }}
+                        />
+                    </div>
+                </div>
 
                 {/* Mode panel */}
                 <AnimatePresence mode="wait">

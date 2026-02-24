@@ -10,7 +10,6 @@ const ScrollProgressBar = () => {
       const scrolled = (scrollTop / docHeight) * 100;
       setScrollWidth(scrolled);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

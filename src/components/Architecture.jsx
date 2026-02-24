@@ -38,7 +38,7 @@ export default function Architecture() {
     const inView = useInView(ref, { once: true, margin: '-80px' })
 
     return (
-        <section className="bg-[#0d1117] border-t border-white/[0.04]">
+        <section className="runtime-architecture border-t border-white/[0.04]">
             <div className="max-w-7xl mx-auto px-6 py-16" ref={ref}>
                 {/* Header */}
                 <div className="flex items-center gap-3 mb-2">
