@@ -86,7 +86,7 @@ export default function Architecture() {
 
                 {/* Properties list */}
                 <motion.div
-                    className="border border-white/[0.04] rounded-[14px] overflow-hidden bg-[#0b0f14]"
+                    className="border border-white/[0.04] rounded-[14px] overflow-hidden bg-transparent"
                     initial={{ opacity: 0, y: 14 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.28, delay: 0.16, ease: 'easeOut' }}

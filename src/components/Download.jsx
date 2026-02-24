@@ -9,7 +9,7 @@ export default function Download() {
     const inView = useInView(ref, { once: true, margin: '-80px' })
 
     return (
-        <section id="download" className="bg-[#0b0f14] border-t border-white/[0.04]">
+        <section id="download" className="bg-transparent border-t border-white/[0.04]">
             <div className="max-w-7xl mx-auto px-6 py-16" ref={ref}>
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
                     {/* Left */}

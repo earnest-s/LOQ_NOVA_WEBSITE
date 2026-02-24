@@ -3,7 +3,7 @@ const RELEASES_URL = 'https://github.com/earnest-s/LoqNova/releases'
 
 export default function Footer() {
     return (
-        <footer className="border-t border-white/[0.04] bg-[#0b0f14]">
+        <footer className="border-t border-white/[0.04] bg-transparent">
             <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 {/* Left */}
                 <div className="flex flex-col gap-1.5">

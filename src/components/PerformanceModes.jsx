@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const MODES = [
@@ -65,10 +65,15 @@ export default function PerformanceModes() {
     const ref = useRef(null)
     const inView = useInView(ref, { once: true, margin: '-80px' })
 
+    // Dispatch event to update background color
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent('themeChange', { detail: { id: active } }));
+    }, [active]);
+
     const mode = MODES.find((m) => m.id === active)
 
     return (
-        <section id="performance" className="bg-[#0b0f14] border-t border-white/[0.04]">
+        <section id="performance" className="bg-transparent border-t border-white/[0.04]">
             <div className="max-w-7xl mx-auto px-6 py-20">
                 {/* Header */}
                 <div ref={ref}>

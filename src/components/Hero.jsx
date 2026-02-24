@@ -11,7 +11,7 @@ const fade = (delay = 0) => ({
 
 export default function Hero() {
     return (
-        <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 pt-12 overflow-hidden bg-[#0b0f14]">
+        <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 pt-12 overflow-hidden bg-transparent">
             {/* Radial depth */}
             <div
                 className="pointer-events-none absolute inset-0"

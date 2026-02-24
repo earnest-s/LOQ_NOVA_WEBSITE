@@ -7,10 +7,12 @@ import PerformanceModes from './components/PerformanceModes'
 import Architecture from './components/Architecture'
 import Download from './components/Download'
 import Footer from './components/Footer'
+import ProceduralGroundBackground from './components/ProceduralGroundBackground'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0b0f14] text-white antialiased">
+    <div className="min-h-screen bg-transparent text-white antialiased relative">
+      <ProceduralGroundBackground />
       <Nav />
       <main>
         <Hero />

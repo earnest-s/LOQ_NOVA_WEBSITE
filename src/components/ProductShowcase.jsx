@@ -118,7 +118,7 @@ function ShowcaseRow({ section, index }) {
 
 export default function ProductShowcase() {
     return (
-        <section id="features" className="bg-[#0b0f14]">
+        <section id="features" className="bg-transparent">
             <div className="max-w-7xl mx-auto">
                 {/* Section header */}
                 <div className="px-6 pt-20 pb-2">

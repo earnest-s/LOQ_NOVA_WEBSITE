@@ -24,8 +24,8 @@ export default function Nav() {
     <nav
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 border-b ${
         scrolled
-          ? 'bg-[#0b0f14]/96 backdrop-blur-sm border-white/[0.05]'
-          : 'bg-[#0b0f14] border-white/[0.04]'
+          ? 'bg-transparent/96 backdrop-blur-sm border-white/[0.05]'
+          : 'bg-transparent border-white/[0.04]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
