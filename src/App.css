@@ -40,3 +40,175 @@
 .read-the-docs {
   color: #888;
 }
+
+/* --- Premium Polish Styles --- */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Section backgrounds */
+.section-bg {
+  background-color: #0B0F14;
+  position: relative;
+}
+body {
+  background: #0B0F14;
+  color: #F5F6FA;
+  font-family: 'Inter', sans-serif;
+}
+.section-bg-radial {
+  background-color: #0B0F14;
+  background-image: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08) 0%, transparent 80%);
+  position: relative;
+}
+
+.section {
+  background-color: #0B0F14;
+  position: relative;
+}
+/* Remove layered gradients except hero/performance */
+.contour-bg {
+  background-image: url('/Images/contour.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contour-bg {
+  background: url('../assets/contour.svg') center/cover no-repeat;
+}
+/* ScreenshotFrame styles */
+.screenshot-frame {
+  background: none;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px 0 rgba(232,100,74,0.08), 0 0 0 1px rgba(255,255,255,0.08);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.screenshot-img {
+.screenshot-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18), 0 0 8px 0 rgba(215,38,61,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #181C22;
+}
+  display: block;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 4px 24px 0 rgba(232,100,74,0.07);
+  background: #181c22;
+}
+.annotation-label {
+  font-size: 12px;
+.hero-headline {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: 2.8rem;
+  position: relative;
+  z-index: 2;
+}
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff;
+  background: rgba(11,15,20,0.8);
+  border-radius: 6px;
+  padding: 2px 8px;
+  opacity: 0.92;
+  pointer-events: none;
+}
+.hero-ghost-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.08;
+  filter: blur(6px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Card interaction */
+.arch-card {
+  transition: border-color 180ms cubic-bezier(0.4,0,0.2,1), transform 180ms cubic-bezier(0.4,0,0.2,1);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #181c22;
+}
+.arch-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.14);
+}
+.hero-section {
+  padding: 96px 0 72px 0;
+  position: relative;
+}
+
+/* Tabs polish */
+.thermal-tabs {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 0.5rem;
+}
+.thermal-tab {
+  position: relative;
+  font-weight: 600;
+  color: #fff;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: color 180ms cubic-bezier(0.4,0,0.2,1);
+}
+.thermal-tab.active {
+  color: #e8644a;
+  text-shadow: 0 0 8px rgba(232,100,74,0.18);
+}
+.thermal-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -2px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(232,100,74,0.18) 0%, rgba(232,100,74,0.08) 100%);
+  border-radius: 2px;
+  transition: left 220ms cubic-bezier(0.4,0,0.2,1), right 220ms cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Remove harsh box shadows */
+.thermal-tab {
+  box-shadow: none;
+}
+
+/* Typography improvements */
+.hero-headline {
+  letter-spacing: -0.045em;
+}
+.body-text {
+  color: #e5e7eb;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.mono-meta {
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff;
+  font-size: 12px;
+  opacity: 0.85;
+}
+.heading-spacing {
+  margin-bottom: 1.2em;
+}
+
+/* Performance: minimize repaint, GPU-friendly */
+.bg-blur {
+  filter: blur(6px);
+  opacity: 0.08;
+  will-change: opacity, filter;
+}

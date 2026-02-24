@@ -43,14 +43,23 @@ export default function CardStackDemoPage() {
     return (
         <div className="w-full flex justify-center py-20 bg-transparent">
             <div className="mx-auto w-full max-w-5xl p-8">
-                <CardStack
-                    items={items}
-                    initialIndex={0}
-                    autoAdvance={true}
-                    intervalMs={2000}
-                    pauseOnHover={true}
-                    showDots={true}
-                />
+                    <section className="section contour-bg">
+                        {/* Hero Section */}
+                    </section>
+                    <section className="section contour-bg full-width-section">
+                        {/* Performance Section - immersive full-width */}
+                    </section>
+                    <section className="section split-section section-gradient">
+                        <div className="split-section-left">
+                            {/* Architecture Section - 60% */}
+                        </div>
+                        <div className="split-section-right">
+                            {/* Architecture Metadata - 40% */}
+                        </div>
+                    </section>
+                    <section className="section centered-section section-gradient">
+                        {/* Product Showcase Section - centered stacked */}
+                    </section>
             </div>
         </div>
     );

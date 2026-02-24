@@ -105,3 +105,14 @@ export default function Architecture() {
         </section>
     )
 }
+                    <style>
+                        {`
+                            .card {
+                                transition: border-color 0.3s ease, transform 0.3s ease;
+                                border-color: #e8644a;
+                            }
+                            .card:hover {
+                                transform: translateY(-5px);
+                            }
+                        `}
+                    </style>
