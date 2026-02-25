@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 const RELEASES_URL = 'https://github.com/earnest-s/LoqNova/releases'
 
@@ -13,6 +13,7 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const navRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32)
@@ -20,13 +21,21 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    // Navbar fade down sequence
+    gsap.fromTo(navRef.current,
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }
+    )
+  }, [])
+
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 border-b ${
-        scrolled
+      ref={navRef}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 border-b opacity-0 ${scrolled
           ? 'bg-transparent/96 backdrop-blur-sm border-white/[0.05]'
           : 'bg-transparent border-white/[0.04]'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
         {/* Logo */}
@@ -37,15 +46,17 @@ export default function Nav() {
           </span>
         </a>
 
-        {/* Center links */}
+        {/* Center links - Dock hover effect added */}
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map(([label, href]) => (
             <a
               key={href}
               href={href}
-              className="text-[10px] font-semibold text-white/30 hover:text-white/80 transition-colors duration-200 uppercase tracking-[0.14em]"
+              className="group relative text-[10px] font-semibold text-white/40 hover:text-white transition-colors duration-200 uppercase tracking-[0.14em]"
             >
               {label}
+              {/* Dock-style underline animation */}
+              <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-white scale-x-0 origin-left transition-transform duration-200 ease-out group-hover:scale-x-100" />
             </a>
           ))}
         </div>

@@ -1,17 +1,23 @@
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 const RELEASES_URL = 'https://github.com/earnest-s/LoqNova/releases'
-const GITHUB_URL = 'https://github.com/earnest-s/LoqNova'
-
-const fade = (delay = 0) => ({
-    initial: { opacity: 0, y: 12 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.3, delay, ease: 'easeOut' },
-})
 
 export default function Hero() {
+    const containerRef = useRef(null)
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(".hero-elem",
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", stagger: 0.08 }
+            )
+        }, containerRef)
+        return () => ctx.revert()
+    }, [])
+
     return (
-        <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 pt-12 overflow-hidden bg-transparent">
+        <section ref={containerRef} className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 pt-12 overflow-hidden bg-transparent">
             {/* Radial depth */}
             <div
                 className="pointer-events-none absolute inset-0"
@@ -33,26 +39,24 @@ export default function Hero() {
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
                 {/* Headline */}
-                <motion.h1
-                    {...fade(0.06)}
-                    className="text-[clamp(48px,8vw,88px)] font-[900] tracking-[-0.04em] text-white leading-[0.92] mb-5 uppercase"
+                <h1
+                    className="hero-elem text-[clamp(48px,8vw,88px)] font-[900] tracking-[-0.04em] text-white leading-[0.92] mb-5 uppercase opacity-0"
                 >
                     Total Control.
                     <br />
                     <span className="text-white/20">Zero Overhead.</span>
-                </motion.h1>
+                </h1>
 
                 {/* Subheadline */}
-                <motion.p
-                    {...fade(0.12)}
-                    className="text-[13px] text-white/30 font-medium max-w-lg mx-auto leading-[1.6] mb-10 tracking-[0.01em]"
+                <p
+                    className="hero-elem text-[13px] text-white/30 font-medium max-w-lg mx-auto leading-[1.6] mb-10 tracking-[0.01em] opacity-0"
                 >
                     Direct subsystem power envelope control for LOQ Laptops — without the abstraction layer.
                     Natively integrated hardware access. Zero background agents.
-                </motion.p>
+                </p>
 
                 {/* CTAs */}
-                <motion.div {...fade(0.18)} className="flex items-center justify-center gap-3">
+                <div className="hero-elem flex items-center justify-center gap-3 opacity-0">
                     <a
                         href={RELEASES_URL}
                         target="_blank"
@@ -67,15 +71,14 @@ export default function Hero() {
                     >
                         View Features
                     </a>
-                </motion.div>
+                </div>
 
                 {/* Build ref */}
-                <motion.p
-                    {...fade(0.24)}
-                    className="mt-8 font-mono-code text-[8px] text-white/12 uppercase tracking-widest"
+                <p
+                    className="hero-elem mt-8 font-mono-code text-[8px] text-white/12 uppercase tracking-widest opacity-0"
                 >
                     Windows x64 · Build 3.0.0 · Direct hardware integration
-                </motion.p>
+                </p>
             </div>
 
             {/* Bottom fade */}

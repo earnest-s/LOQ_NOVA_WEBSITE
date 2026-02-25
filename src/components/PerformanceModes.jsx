@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { gsap } from 'gsap'
 
 const MODES = [
     {
@@ -62,13 +62,23 @@ const MODES = [
 
 export default function PerformanceModes() {
     const [active, setActive] = useState('balance')
-    const ref = useRef(null)
-    const inView = useInView(ref, { once: true, margin: '-80px' })
+    const panelRef = useRef(null)
 
     // Dispatch event to update background color
     useEffect(() => {
         window.dispatchEvent(new CustomEvent('themeChange', { detail: { id: active } }));
     }, [active]);
+
+    // GSAP Animation for mode switch
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(panelRef.current,
+                { opacity: 0, y: 8 },
+                { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }
+            )
+        }, panelRef)
+        return () => ctx.revert()
+    }, [active])
 
     const mode = MODES.find((m) => m.id === active)
 
@@ -76,7 +86,7 @@ export default function PerformanceModes() {
         <section id="performance" className="bg-transparent border-t border-white/[0.04]">
             <div className="max-w-7xl mx-auto px-6 py-20">
                 {/* Header */}
-                <div ref={ref}>
+                <div>
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-6 h-px bg-white/10" />
                         <span className="font-mono-code text-[9px] text-white/20 uppercase tracking-[0.22em]">
@@ -92,7 +102,7 @@ export default function PerformanceModes() {
                 </div>
 
                 {/* Mode selector */}
-                <div className="tabs-container mb-10" style={{ background: mode.accent }}>
+                <div className="tabs-container mb-10 transition-colors duration-300" style={{ background: mode.accent }}>
                     <div className="tabs" role="tablist">
                         {MODES.map((m, idx) => {
                             const isActive = m.id === active
@@ -109,70 +119,64 @@ export default function PerformanceModes() {
                             )
                         })}
                         <div
-                            className="tab-underline"
-                            style={{ transform: `translateX(${MODES.findIndex(s => s.id === active) * 100}%)`, width: `${100 / MODES.length}%` }}
+                            className="tab-underline transition-transform duration-300 ease-in-out"
+                            style={{ transform: `translateX(${MODES.findIndex(s => s.id === active) * 100}%)`, width: `${100 / MODES.length}%`, background: mode.color }}
                         />
                     </div>
                 </div>
 
                 {/* Mode panel */}
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={active}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
-                        className="rounded-[14px] border border-white/[0.05] overflow-hidden"
-                        style={{ background: mode.accent }}
-                    >
-                        <div className="flex flex-col md:flex-row gap-0">
-                            {/* Left: description */}
-                            <div className="flex-1 p-8 md:border-r border-white/[0.04]">
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span
-                                        className="w-1.5 h-1.5 rounded-sm rotate-45"
-                                        style={{ backgroundColor: mode.color }}
-                                    />
-                                    <span className="font-mono-code text-[8.5px] uppercase tracking-[0.2em]" style={{ color: mode.color }}>
-                                        {mode.tag}
-                                    </span>
-                                </div>
-                                <h3
-                                    className="text-[22px] font-[900] uppercase tracking-[-0.02em] mb-3"
-                                    style={{ color: mode.color === '#a1a1aa' ? '#ffffff' : mode.color }}
-                                >
-                                    {mode.label} Mode
-                                </h3>
-                                <p className="text-[11.5px] text-white/25 leading-[1.65] font-medium max-w-xs">
-                                    {mode.desc}
-                                </p>
+                <div
+                    ref={panelRef}
+                    className="rounded-[14px] border border-white/[0.05] overflow-hidden transition-colors duration-300"
+                    style={{ background: mode.accent }}
+                >
+                    <div className="flex flex-col md:flex-row gap-0">
+                        {/* Left: description */}
+                        <div className="flex-1 p-8 md:border-r border-white/[0.04]">
+                            <div className="flex items-center gap-2 mb-4">
+                                <span
+                                    className="w-1.5 h-1.5 rounded-sm rotate-45 transition-colors duration-300"
+                                    style={{ backgroundColor: mode.color }}
+                                />
+                                <span className="font-mono-code text-[8.5px] uppercase tracking-[0.2em] transition-colors duration-300" style={{ color: mode.color }}>
+                                    {mode.tag}
+                                </span>
                             </div>
+                            <h3
+                                className="text-[22px] font-[900] uppercase tracking-[-0.02em] mb-3 transition-colors duration-300"
+                                style={{ color: mode.color === '#a1a1aa' ? '#ffffff' : mode.color }}
+                            >
+                                {mode.label} Mode
+                            </h3>
+                            <p className="text-[11.5px] text-white/25 leading-[1.65] font-medium max-w-xs">
+                                {mode.desc}
+                            </p>
+                        </div>
 
-                            {/* Right: specs table */}
-                            <div className="flex-1 p-8">
-                                <div className="flex flex-col gap-0">
-                                    {mode.specs.map((s, i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-0"
+                        {/* Right: specs table */}
+                        <div className="flex-1 p-8">
+                            <div className="flex flex-col gap-0">
+                                {mode.specs.map((s, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-0"
+                                    >
+                                        <span className="text-[10px] font-semibold text-white/25 uppercase tracking-[0.12em]">
+                                            {s.key}
+                                        </span>
+                                        <span
+                                            className="font-mono-code text-[10px] font-semibold transition-colors duration-300"
+                                            style={{ color: mode.color === '#94a3b8' ? 'rgba(255,255,255,0.7)' : mode.color }}
                                         >
-                                            <span className="text-[10px] font-semibold text-white/25 uppercase tracking-[0.12em]">
-                                                {s.key}
-                                            </span>
-                                            <span
-                                                className="font-mono-code text-[10px] font-semibold"
-                                                style={{ color: mode.color === '#94a3b8' ? 'rgba(255,255,255,0.7)' : mode.color }}
-                                            >
-                                                {s.val}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                                            {s.val}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </motion.div>
-                </AnimatePresence>
+                    </div>
+                </div>
             </div>
         </section>
     )

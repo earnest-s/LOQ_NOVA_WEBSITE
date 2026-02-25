@@ -1,29 +1,15 @@
-import React from 'react';
-
-const SpotlightContainer = ({ children }) => {
+export default function SpotlightContainer({ children, className = "" }) {
   return (
-    <div
-      style={{
-        position: 'relative',
-        zIndex: 1,
-      }}
-    >
+    <div className={`relative overflow-hidden ${className}`}>
       <div
+        className="pointer-events-none absolute inset-0 z-0"
         style={{
-          content: '',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '120%',
-          height: '120%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 80%)',
-          zIndex: -1,
+          background: 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.015) 0%, transparent 60%)'
         }}
       />
-      {children}
+      <div className="relative z-10 p-0.5">
+        {children}
+      </div>
     </div>
-  );
-};
-
-export default SpotlightContainer;
+  )
+}

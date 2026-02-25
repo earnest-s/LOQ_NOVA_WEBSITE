@@ -1,16 +1,12 @@
-import React from 'react';
-
-const SectionDivider = () => {
+export default function SectionDivider() {
   return (
-    <div
-      style={{
-        height: '1px',
-        width: '100%',
-        background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)',
-        margin: '80px 0',
-      }}
-    />
-  );
-};
-
-export default SectionDivider;
+    <div className="w-full flex justify-center py-20 relative z-10">
+      <div
+        className="w-full max-w-7xl h-px"
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)'
+        }}
+      />
+    </div>
+  )
+}

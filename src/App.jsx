@@ -24,12 +24,50 @@ export default function App() {
         <Nav />
         <main>
           <Hero />
-          <CardStackDemoPage />
-          <ProductShowcase />
-          <RGBEngine />
-          <PerformanceModes />
-          <Architecture />
-          <Download />
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <FeatureGrid />
+          </SectionReveal>
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <CardStackDemoPage />
+          </SectionReveal>
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <ProductShowcase />
+          </SectionReveal>
+
+          <SectionDivider />
+
+          <SpotlightContainer>
+            <SectionReveal>
+              <RGBEngine />
+            </SectionReveal>
+          </SpotlightContainer>
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <PerformanceModes />
+          </SectionReveal>
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <Architecture />
+          </SectionReveal>
+
+          <SectionDivider />
+
+          <SectionReveal>
+            <Download />
+          </SectionReveal>
         </main>
         <Footer />
       </div>

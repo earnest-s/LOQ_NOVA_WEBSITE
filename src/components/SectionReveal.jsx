@@ -1,43 +1,36 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const SectionReveal = ({ children }) => {
-  const ref = useRef(null);
+gsap.registerPlugin(ScrollTrigger)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          ref.current.style.opacity = 1;
-          ref.current.style.transform = 'translateY(0)';
-          observer.unobserve(ref.current);
-        }
-      },
-      { threshold: 0.1 }
-    );
+export default function SectionReveal({ children, className = "" }) {
+    const containerRef = useRef(null)
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(containerRef.current,
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.25,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            )
+        }, containerRef)
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
+        return () => ctx.revert()
+    }, [])
 
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: 0,
-        transform: 'translateY(20px)',
-        transition: 'opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-export default SectionReveal;
+    return (
+        <div ref={containerRef} className={`will-change-[opacity,transform] ${className}`}>
+            {children}
+        </div>
+    )
+}
