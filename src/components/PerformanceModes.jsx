@@ -102,8 +102,8 @@ export default function PerformanceModes() {
                 </div>
 
                 {/* Mode selector */}
-                <div className="tabs-container mb-10 transition-colors duration-300" style={{ background: mode.accent }}>
-                    <div className="tabs" role="tablist">
+                <div className="relative mb-10 transition-colors duration-300 w-full rounded-full p-1 flex justify-center" style={{ background: mode.accent }}>
+                    <div className="relative flex w-full max-w-2xl" role="tablist">
                         {MODES.map((m, idx) => {
                             const isActive = m.id === active
                             return (
@@ -111,7 +111,7 @@ export default function PerformanceModes() {
                                     key={m.id}
                                     role="tab"
                                     onClick={() => setActive(m.id)}
-                                    className={`tab${isActive ? ' active' : ''}`}
+                                    className={`relative z-10 flex-1 text-center text-[13px] font-semibold py-2 px-4 cursor-pointer transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/40'}`}
                                     style={{ background: 'none', border: 'none' }}
                                 >
                                     {m.label}
@@ -119,7 +119,7 @@ export default function PerformanceModes() {
                             )
                         })}
                         <div
-                            className="tab-underline transition-transform duration-300 ease-in-out"
+                            className="absolute top-0 bottom-0 left-0 rounded-full z-0 transition-transform duration-300 ease-in-out"
                             style={{ transform: `translateX(${MODES.findIndex(s => s.id === active) * 100}%)`, width: `${100 / MODES.length}%`, background: mode.color }}
                         />
                     </div>
