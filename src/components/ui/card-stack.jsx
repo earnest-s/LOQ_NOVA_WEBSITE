@@ -1,114 +1,332 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+"use client";
 
-export const CardStack = ({
+import * as React from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { SquareArrowOutUpRight } from "lucide-react";
+
+function cn(...classes) {
+    return classes.filter(Boolean).join(" ");
+}
+
+function wrapIndex(n, len) {
+    if (len <= 0) return 0;
+    return ((n % len) + len) % len;
+}
+
+function signedOffset(i, active, len, loop) {
+    const raw = i - active;
+    if (!loop || len <= 1) return raw;
+
+    const alt = raw > 0 ? raw - len : raw + len;
+    return Math.abs(alt) < Math.abs(raw) ? alt : raw;
+}
+
+export function CardStack({
     items,
-    offset = 15,
-    scaleFactor = 0.08,
-    autoAdvance = true,
-    intervalMs = 2000,
-    pauseOnHover = true,
-    showDots = false,
     initialIndex = 0,
-}) => {
-    const [cards, setCards] = useState(items);
-    const [isHovering, setIsHovering] = useState(false);
+    maxVisible = 7,
 
-    // Initialize with initialIndex if needed
-    useEffect(() => {
-        if (initialIndex > 0 && initialIndex < items.length) {
-            const newItems = [...items];
-            const itemsToMove = newItems.splice(0, initialIndex);
-            setCards([...newItems, ...itemsToMove]);
-        }
-    }, [initialIndex, items]);
+    cardWidth = 520,
+    cardHeight = 320,
 
-    useEffect(() => {
+    overlap = 0.48,
+    spreadDeg = 48,
+
+    perspectivePx = 1100,
+    depthPx = 140,
+    tiltXDeg = 12,
+
+    activeLiftPx = 22,
+    activeScale = 1.03,
+    inactiveScale = 0.94,
+
+    springStiffness = 280,
+    springDamping = 28,
+
+    loop = true,
+    autoAdvance = false,
+    intervalMs = 2800,
+    pauseOnHover = true,
+
+    showDots = true,
+    className,
+
+    onChangeIndex,
+    renderCard,
+}) {
+    const reduceMotion = useReducedMotion();
+    const len = items?.length || 0;
+
+    const [active, setActive] = React.useState(() =>
+        wrapIndex(initialIndex, len),
+    );
+    const [hovering, setHovering] = React.useState(false);
+
+    React.useEffect(() => {
+        setActive((a) => wrapIndex(a, len));
+    }, [len]);
+
+    React.useEffect(() => {
+        if (!len) return;
+        onChangeIndex?.(active, items[active]);
+    }, [active, len, onChangeIndex, items]);
+
+    const maxOffset = Math.max(0, Math.floor(maxVisible / 2));
+
+    const cardSpacing = Math.max(10, Math.round(cardWidth * (1 - overlap)));
+    const stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0;
+
+    const canGoPrev = loop || active > 0;
+    const canGoNext = loop || active < len - 1;
+
+    const prev = React.useCallback(() => {
+        if (!len) return;
+        if (!canGoPrev) return;
+        setActive((a) => wrapIndex(a - 1, len));
+    }, [canGoPrev, len]);
+
+    const next = React.useCallback(() => {
+        if (!len) return;
+        if (!canGoNext) return;
+        setActive((a) => wrapIndex(a + 1, len));
+    }, [canGoNext, len]);
+
+    const onKeyDown = (e) => {
+        if (e.key === "ArrowLeft") prev();
+        if (e.key === "ArrowRight") next();
+    };
+
+    React.useEffect(() => {
         if (!autoAdvance) return;
-        if (pauseOnHover && isHovering) return;
+        if (reduceMotion) return;
+        if (!len) return;
+        if (pauseOnHover && hovering) return;
 
-        const interval = setInterval(() => {
-            setCards((prevCards) => {
-                const newArray = [...prevCards];
-                // Move the top card to the back
-                newArray.push(newArray.shift());
-                return newArray;
-            });
-        }, intervalMs);
+        const id = window.setInterval(
+            () => {
+                if (loop || active < len - 1) next();
+            },
+            Math.max(700, intervalMs),
+        );
 
-        return () => clearInterval(interval);
-    }, [autoAdvance, intervalMs, pauseOnHover, isHovering]);
+        return () => window.clearInterval(id);
+    }, [
+        autoAdvance,
+        intervalMs,
+        hovering,
+        pauseOnHover,
+        reduceMotion,
+        len,
+        loop,
+        active,
+        next,
+    ]);
+
+    if (!len) return null;
+
+    const activeItem = items[active];
 
     return (
         <div
-            className="relative h-[400px] w-full max-w-[600px] mx-auto perspective-1000"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
+            className={cn("w-full", className)}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
         >
-            <div className="absolute inset-x-0 bottom-[-40px] flex justify-center gap-2">
-                {showDots && items.map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${cards[0].id === items[i].id ? "w-6 bg-white" : "bg-white/20"}`}
-                    />
-                ))}
+            <div
+                className="relative w-full"
+                style={{ height: Math.max(380, cardHeight + 80) }}
+                tabIndex={0}
+                onKeyDown={onKeyDown}
+            >
+                <div
+                    className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-48 w-[70%] rounded-full bg-black/5 blur-3xl dark:bg-white/5"
+                    aria-hidden="true"
+                />
+                <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-40 w-[76%] rounded-full bg-black/10 blur-3xl dark:bg-black/30"
+                    aria-hidden="true"
+                />
+
+                <div
+                    className="absolute inset-0 flex items-end justify-center"
+                    style={{
+                        perspective: `${perspectivePx}px`,
+                    }}
+                >
+                    <AnimatePresence initial={false}>
+                        {items.map((item, i) => {
+                            const off = signedOffset(i, active, len, loop);
+                            const abs = Math.abs(off);
+                            const visible = abs <= maxOffset;
+
+                            if (!visible) return null;
+
+                            const rotateZ = off * stepDeg;
+                            const x = off * cardSpacing;
+                            const y = abs * 10;
+                            const z = -abs * depthPx;
+
+                            const isActive = off === 0;
+
+                            const scale = isActive ? activeScale : inactiveScale;
+                            const lift = isActive ? -activeLiftPx : 0;
+
+                            const rotateX = isActive ? 0 : tiltXDeg;
+
+                            const zIndex = 100 - abs;
+
+                            const dragProps = isActive
+                                ? {
+                                    drag: "x",
+                                    dragConstraints: { left: 0, right: 0 },
+                                    dragElastic: 0.18,
+                                    onDragEnd: (
+                                        _e,
+                                        info
+                                    ) => {
+                                        if (reduceMotion) return;
+                                        const travel = info.offset.x;
+                                        const v = info.velocity.x;
+                                        const threshold = Math.min(160, cardWidth * 0.22);
+
+                                        if (travel > threshold || v > 650) prev();
+                                        else if (travel < -threshold || v < -650) next();
+                                    },
+                                }
+                                : {};
+
+                            return (
+                                <motion.div
+                                    key={item.id}
+                                    className={cn(
+                                        "absolute bottom-0 rounded-2xl border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl",
+                                        "will-change-transform select-none",
+                                        isActive
+                                            ? "cursor-grab active:cursor-grabbing"
+                                            : "cursor-pointer",
+                                    )}
+                                    style={{
+                                        width: cardWidth,
+                                        height: cardHeight,
+                                        zIndex,
+                                        transformStyle: "preserve-3d",
+                                    }}
+                                    initial={
+                                        reduceMotion
+                                            ? false
+                                            : {
+                                                opacity: 0,
+                                                y: y + 40,
+                                                x,
+                                                rotateZ,
+                                                rotateX,
+                                                scale,
+                                            }
+                                    }
+                                    animate={{
+                                        opacity: 1,
+                                        x,
+                                        y: y + lift,
+                                        rotateZ,
+                                        rotateX,
+                                        scale,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: springStiffness,
+                                        damping: springDamping,
+                                    }}
+                                    onClick={() => setActive(i)}
+                                    {...dragProps}
+                                >
+                                    <div
+                                        className="h-full w-full"
+                                        style={{
+                                            transform: `translateZ(${z}px)`,
+                                            transformStyle: "preserve-3d",
+                                        }}
+                                    >
+                                        {renderCard ? (
+                                            renderCard(item, { active: isActive })
+                                        ) : (
+                                            <DefaultFanCard item={item} active={isActive} />
+                                        )}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
+                </div>
             </div>
 
-            <AnimatePresence>
-                {cards.map((card, index) => {
-                    return (
-                        <motion.div
-                            layoutId={`card-${card.id}`}
-                            key={card.id}
-                            className="absolute h-full w-full rounded-3xl shadow-2xl border border-white/10 overflow-hidden flex flex-col justify-end"
-                            style={{
-                                transformOrigin: "bottom center",
-                            }}
-                            animate={{
-                                top: index * -offset,
-                                scale: 1 - index * scaleFactor,
-                                zIndex: cards.length - index,
-                                opacity: index > 2 ? 0 : 1 - index * 0.2, // Fade out cards that are too far back
-                            }}
-                            transition={{
-                                duration: 0.6,
-                                ease: [0.32, 0.72, 0, 1], // Custom easing for smooth fluid motion
-                            }}
+            {showDots ? (
+                <div className="mt-6 flex items-center justify-center gap-3">
+                    <div className="flex items-center gap-2">
+                        {items.map((it, idx) => {
+                            const on = idx === active;
+                            return (
+                                <button
+                                    key={it.id}
+                                    onClick={() => setActive(idx)}
+                                    className={cn(
+                                        "h-2 w-2 rounded-full transition",
+                                        on
+                                            ? "bg-white"
+                                            : "bg-white/30 hover:bg-white/50",
+                                    )}
+                                    aria-label={`Go to ${it.title}`}
+                                />
+                            );
+                        })}
+                    </div>
+                    {activeItem.href ? (
+                        <a
+                            href={activeItem.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-white/50 hover:text-white transition"
+                            aria-label="Open link"
                         >
-                            {/* Image Background */}
-                            <div
-                                className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
-                                style={{ backgroundImage: `url(${card.imageSrc})` }}
-                            />
-                            {/* Dark background behind the contained image */}
-                            <div className="absolute inset-0 z-[-1] bg-[#0b0f14]" />
-
-                            {/* Gradient Overlay for Text Readability */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
-
-                            {/* Content */}
-                            <div className="relative z-20 p-8 pt-20">
-                                <a
-                                    href={card.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-block group"
-                                >
-                                    <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-2 flex items-center gap-3">
-                                        {card.title}
-                                        <svg className="w-5 h-5 opacity-0 -ml-4 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </h3>
-                                </a>
-                                <p className="text-white/70 text-sm md:text-base font-medium max-w-sm">
-                                    {card.description}
-                                </p>
-                            </div>
-                        </motion.div>
-                    );
-                })}
-            </AnimatePresence>
+                            <SquareArrowOutUpRight className="h-4 w-4" />
+                        </a>
+                    ) : null}
+                </div>
+            ) : null}
         </div>
     );
-};
+}
+
+function DefaultFanCard({ item, active }) {
+    return (
+        <div className="relative h-full w-full">
+            <div className="absolute inset-0">
+                {item.imageSrc ? (
+                    <img
+                        src={item.imageSrc}
+                        alt={item.title}
+                        className="h-full w-full object-cover"
+                        draggable={false}
+                        loading="eager"
+                    />
+                ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-sm text-white/50">
+                        No image
+                    </div>
+                )}
+            </div>
+
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+            <div className="relative z-10 flex h-full flex-col justify-end p-5">
+                <div className="truncate text-lg font-semibold text-white">
+                    {item.title}
+                </div>
+                {item.description ? (
+                    <div className="mt-1 line-clamp-2 text-sm text-white/80">
+                        {item.description}
+                    </div>
+                ) : null}
+            </div>
+        </div>
+    );
+}
