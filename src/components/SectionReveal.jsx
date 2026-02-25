@@ -29,7 +29,7 @@ export default function SectionReveal({ children, className = "" }) {
     }, [])
 
     return (
-        <div ref={containerRef} className={`will-change-[opacity,transform] ${className}`}>
+        <div ref={containerRef} className={`will-change-[opacity,transform] backdrop-blur-sm ${className}`}>
             {children}
         </div>
     )
