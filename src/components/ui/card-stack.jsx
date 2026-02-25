@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { SquareArrowOutUpRight } from "lucide-react";
 
 function cn(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -279,22 +278,12 @@ export function CardStack({
                             );
                         })}
                     </div>
-                    {activeItem.href ? (
-                        <a
-                            href={activeItem.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-white/50 hover:text-white transition"
-                            aria-label="Open link"
-                        >
-                            <SquareArrowOutUpRight className="h-4 w-4" />
-                        </a>
-                    ) : null}
                 </div>
             ) : null}
         </div>
     );
 }
+
 
 function DefaultFanCard({ item, active }) {
     return (
